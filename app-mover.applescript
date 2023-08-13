@@ -69,7 +69,7 @@ if countDisplays is equal to 2 then
 		if exists application "Messages" then
 			tell application "Messages"
 				if exists window 1 then
-					set bounds of window 1 to {864, 548, 1728, 1058}
+					set bounds of window 1 to {2688, 553, 3648, 1081}
 				end if
 			end tell
 		end if
@@ -77,7 +77,7 @@ if countDisplays is equal to 2 then
 			tell application process "Signal"
 				if exists window 1 then
 					tell window 1
-						set {position, size} to {{864, 38}, {864, 510}}
+						set {position, size} to {{2688, 25}, {960, 528}}
 					end tell
 				end if
 			end tell
@@ -86,7 +86,7 @@ if countDisplays is equal to 2 then
 			tell application process "Slack"
 				if exists window 1 then
 					tell window 1
-						set {position, size} to {{0, 38}, {864, 1018}}
+						set {position, size} to {{1729, 25}, {960, 1055}}
 					end tell
 				end if
 			end tell
@@ -95,7 +95,7 @@ if countDisplays is equal to 2 then
 			tell application process "KeePassXC"
 				if exists window 1 then
 					tell window 1
-						set {position, size} to {{0, 38}, {1728, 1019}}
+						set {position, size} to {{1728, 25}, {1920, 1055}}
 					end tell
 				end if
 			end tell
