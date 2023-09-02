@@ -2,103 +2,69 @@
 	Script to check for the number of displays connected and move windows as desired.
  *)
 
--- Find the number of connected displays
-tell application "Image Events"
-	launch
-	set countDisplays to count displays
-	quit
-end tell
 
--- If 3 displays are connected, move applications to defined locations.
+use AppleScript version "2.4" -- Yosemite (10.10) or later
+use framework "Foundation"
+use framework "AppKit"
+use scripting additions
+-- Find the resolution of all connected displays
+set allFrames to (current application's NSScreen's screens()'s valueForKey:"frame") as list
+set countDisplays to count of items in allFrames
+set applicationList to {{"Microsoft Outlook", {0, 38, 1728, 1057}}, {"Messages", {3649, 276, 4728, 901}}}
+set twoApplicationList to {{"Microsoft Outlook", {1728, 25, 3648, 1080}}, {"Messages", {2688, 553, 3648, 1081}}}
+set applicationProcessList to {{"Signal", {{3648, -350}, {1079, 625}}}, {"Slack", {{3649, 901}, {1079, 644}}}, {"KeePassXC", {{3648, -350}, {1080, 1895}}}}
+set twoApplicationProcessList to {{"Signal", {{2688, 25}, {960, 528}}}, {"Slack", {{1729, 25}, {960, 1055}}}, {"KeePassXC", {{1728, 25}, {1920, 1055}}}}
+
 if countDisplays is equal to 3 then
-	tell application "System Events"
-		if exists application "Microsoft Outlook" then
-			tell application "Microsoft Outlook"
+	repeat with i from 1 to number of items in applicationList
+		set appName to item i of applicationList
+		if exists application (item 1 of appName) then
+			tell application (item 1 of appName)
 				if exists window 1 then
-					set bounds of window 1 to {0, 38, 1728, 1057}
+					set bounds of window 1 to (item 2 of appName)
 				end if
 			end tell
 		end if
-		if exists application "Messages" then
-			tell application "Messages"
-				if exists window 1 then
-					set bounds of window 1 to {3649, 276, 4728, 901}
-				end if
-			end tell
-		end if
-		if exists application process "Signal" then
-			tell application process "Signal"
-				if exists window 1 then
-					tell window 1
-						set {position, size} to {{3648, -350}, {1079, 625}}
-					end tell
-				end if
-			end tell
-		end if
-		if exists application process "Slack" then
-			tell application process "Slack"
-				if exists window 1 then
-					tell window 1
-						set {position, size} to {{3649, 901}, {1079, 644}}
-					end tell
-				end if
-			end tell
-		end if
-		if exists application process "KeePassXC" then
-			tell application process "KeePassXC"
-				if exists window 1 then
-					tell window 1
-						set {position, size} to {{3648, -350}, {1080, 1895}}
-					end tell
-				end if
-			end tell
-		end if
-	end tell
+	end repeat
+	repeat with i from 1 to number of items in applicationProcessList
+		set processName to item i of applicationProcessList
+		tell application "System Events"
+			if exists application process (item 1 of processName) then
+				tell application process (item 1 of processName)
+					if exists window 1 then
+						tell window 1
+							set {position, size} to (item 2 of processName)
+						end tell
+					end if
+				end tell
+			end if
+		end tell
+	end repeat
 end if
 
--- If 2 displays are connected, move applications to defined locations.
 if countDisplays is equal to 2 then
-	tell application "System Events"
-		if exists application "Microsoft Outlook" then
-			tell application "Microsoft Outlook"
+	repeat with i from 1 to number of items in twoApplicationList
+		set appName to item i of twoApplicationList
+		if exists application (item 1 of appName) then
+			tell application (item 1 of appName)
 				if exists window 1 then
-					set bounds of window 1 to {1728, 25, 3648, 1080}
+					set bounds of window 1 to (item 2 of appName)
 				end if
 			end tell
 		end if
-		if exists application "Messages" then
-			tell application "Messages"
-				if exists window 1 then
-					set bounds of window 1 to {2688, 553, 3648, 1081}
-				end if
-			end tell
-		end if
-		if exists application process "Signal" then
-			tell application process "Signal"
-				if exists window 1 then
-					tell window 1
-						set {position, size} to {{2688, 25}, {960, 528}}
-					end tell
-				end if
-			end tell
-		end if
-		if exists application process "Slack" then
-			tell application process "Slack"
-				if exists window 1 then
-					tell window 1
-						set {position, size} to {{1729, 25}, {960, 1055}}
-					end tell
-				end if
-			end tell
-		end if
-		if exists application process "KeePassXC" then
-			tell application process "KeePassXC"
-				if exists window 1 then
-					tell window 1
-						set {position, size} to {{1728, 25}, {1920, 1055}}
-					end tell
-				end if
-			end tell
-		end if
-	end tell
+	end repeat
+	repeat with i from 1 to number of items in twoApplicationProcessList
+		set processName to item i of twoApplicationProcessList
+		tell application "System Events"
+			if exists application process (item 1 of processName) then
+				tell application process (item 1 of processName)
+					if exists window 1 then
+						tell window 1
+							set {position, size} to (item 2 of processName)
+						end tell
+					end if
+				end tell
+			end if
+		end tell
+	end repeat
 end if
