@@ -11,9 +11,9 @@ use scripting additions
 set allFrames to (current application's NSScreen's screens()'s valueForKey:"frame") as list
 set countDisplays to count of items in allFrames
 set applicationList to {{"Microsoft Outlook", {0, 38, 1728, 1057}}, {"Messages", {3649, 276, 4728, 901}}}
-set twoApplicationList to {{"Microsoft Outlook", {1728, 25, 3648, 1080}}, {"Messages", {2688, 553, 3648, 1081}}}
+set twoApplicationList to {{"Microsoft Outlook", {-1920, 25, 0, 1080}}, {"Messages", {-960, 553, 0, 1081}}}
 set applicationProcessList to {{"Signal", {{3648, -350}, {1079, 625}}}, {"Slack", {{3649, 901}, {1079, 644}}}, {"KeePassXC", {{3648, -350}, {1080, 1895}}}}
-set twoApplicationProcessList to {{"Signal", {{2688, 25}, {960, 528}}}, {"Slack", {{1729, 25}, {960, 1055}}}, {"KeePassXC", {{1728, 25}, {1920, 1055}}}}
+set twoApplicationProcessList to {{"Signal", {{-960, 25}, {960, 528}}}, {"Slack", {{-1920, 25}, {960, 1055}}}, {"KeePassXC", {{-1920, 25}, {1920, 1055}}}}
 
 if countDisplays is equal to 3 then
 	repeat with i from 1 to number of items in applicationList
